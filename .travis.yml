@@ -2,7 +2,14 @@ sudo: false
 language: python
 python:
   - "3.6"
+env:
+  - SPARK=2.4 SPARK_URL="http://apache.cs.utah.edu/spark/spark-2.4.4/spark-2.4.4-bin-hadoop2.7.tgz"
 before_install:
+  - mkdir -p /opt
+  - wget -nv -O /opt/spark.tgz "$SPARK_URL"
+  - tar xzf /opt/spark.tgz -C /opt/
+  - rm /opt/spark.tgz
+  - ln -s $(find /opt -maxdepth 1 -name "spark-*" -print0) /opt/spark
   - pip install --upgrade pip
   - pip install poetry
 install:
