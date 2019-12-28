@@ -1,0 +1,15 @@
+sudo: false
+language: python
+python:
+  - "3.6"
+before_install:
+  - pip install --upgrade pip
+  - pip install poetry
+install:
+  - poetry install
+  - pip install coveralls
+script:
+  - poetry run flake8 intake_hive
+  - poetry run pytest intake_hive
+after_success:
+    coveralls

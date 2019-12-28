@@ -1,0 +1,69 @@
+[tool.poetry]
+name = "intake-hive"
+version = "0.1.0"
+description = "Intake Hive DataSource Plugin."
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Natural Language :: English",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7"
+]
+authors = ["Zillow AI Platform"]
+readme = "README.rst"
+
+[tool.poetry.plugins]
+[tool.poetry.plugins."intake.drivers"]
+hive = "intake_hive.hive_source:HiveSource"
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+intake = ">=0.5.3"
+pyspark = "==2.3.0"  # todo: make >
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2.2"
+flake8 = "^3.7"
+mypy = "^0.740.0"
+black = {version = "^18.3-alpha.0", allows-prereleases = true}
+isort = "^4.3"
+seed-isort-config = "^1.9"
+pytest-cov = "^2.8"
+pre-commit = "^1.20"
+hypothesis = "^4.44"
+intake-parquet = "^0.2.3"
+intake-dal = "^0.1.3"
+
+[tool.poetry.extras]
+doc = ["sphinx", "sphinx_rtd_theme"]
+
+[tool.isort]
+known_first_party = 'intake_hive'
+known_third_party = ["intake", "numpy", "pandas", "pkg_resources", "setuptools", "sphinx_rtd_theme"]
+multi_line_output = 3
+lines_after_imports = 2
+force_grid_wrap = 0
+combine_as_imports = true
+include_trailing_comma = true
+
+[tool.black]
+line-length = 110
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
