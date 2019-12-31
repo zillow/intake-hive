@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# event-tracking-service documentation build configuration file, created by
+# intake-hive documentation build configuration file, created by
 # sphinx-quickstart on Wed Jun  8 10:13:28 2016.
 #
 # This file is execfile()d with the current directory set to its
@@ -47,7 +47,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "intake-dal"
+project = "intake-hive"
 copyright = "2019, aiplat@zillow.com"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -197,7 +197,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "intake-daldoc"
+htmlhelp_basename = "intake-hivedoc"
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -215,7 +215,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
-latex_documents = [("index", "intake-dal.tex", "intake-dal Documentation", "aiplat@zillow.com", "manual")]
+latex_documents = [("index", "intake-hive.tex", "intake-hive Documentation", "aiplat@zillow.com", "manual")]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
@@ -242,7 +242,7 @@ latex_documents = [("index", "intake-dal.tex", "intake-dal Documentation", "aipl
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [("index", "intake-dal", "intake-dal Documentation", ["aiplat@zillow.com"], 1)]
+man_pages = [("index", "intake-hive", "intake-hive Documentation", ["aiplat@zillow.com"], 1)]
 
 # If true, show URL addresses after external links.
 # man_show_urls = False
@@ -256,10 +256,10 @@ man_pages = [("index", "intake-dal", "intake-dal Documentation", ["aiplat@zillow
 texinfo_documents = [
     (
         "index",
-        "intake-dal",
-        "intake-dal Documentation",
+        "intake-hive",
+        "intake-hive Documentation",
         "",
-        "intake-dal",
+        "intake-hive",
         "One line description of project.",
         "Miscellaneous",
     )

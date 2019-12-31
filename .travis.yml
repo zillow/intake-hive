@@ -15,7 +15,6 @@ install:
   - poetry install
   - pip install coveralls
 script:
-  - poetry run flake8 intake_hive
-  - poetry run pytest intake_hive
+  - poetry run pre-commit run --all-files
 after_success:
     coveralls

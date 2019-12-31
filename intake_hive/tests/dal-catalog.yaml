@@ -11,6 +11,14 @@ metadata:
                   ],
        "name": "Root",
        "type": "record"}
+    entity.user.user_events_partitioned: >
+      {"fields": [{"name": "userid", "type": "long"},
+                  {"name": "home_id", "type": "int"},
+                  {"name": "action", "type": ["string"]},
+                  {"name": "timestamp", "type": ["null", {"logicalType": "timestamp-millis", "type": "long"}]}
+                  ],
+       "name": "Root",
+       "type": "record"}
 entity:
   user:
     user_events:
@@ -20,17 +28,14 @@ entity:
         default: 'local'
         storage:
           local: 'csv://{{ CATALOG_DIR }}/data/user_events.csv'
-          batch: 'hive://user_events'
+          batch: 'hive://user_events_dal_catalog'
+    user_events_partitioned:
+      driver: dal
+      args:
+        default: 'batch'
+        storage:
+          batch: "hive://user_events_dal_catalog?userid={{userid}}"
       parameters:
-        data_path:
-          description: should be 'data'
-          type: str
-        date:
-          description: should be '2019-08-12'
-          type: str
-      metadata:
-        dal-online:
-          write_delay_between_chunks_milliseconds: 50
-          write_chunk_size: 10
-          write_parallelism: 2
-
+        userid:
+          description: userid partition
+          type: int

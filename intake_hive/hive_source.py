@@ -1,23 +1,23 @@
 import threading
 from typing import Dict, List
-from urllib.parse import ParseResult, urlparse, parse_qs  # noqa: F401
+from urllib.parse import ParseResult, parse_qs, urlparse  # noqa: F401
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 import pkg_resources
-from pyspark import sql, SparkContext
+from intake import DataSource, Schema
+from pyspark import SparkContext, sql
 from pyspark.sql import SparkSession
 from pyspark.sql.types import (
-        ByteType,
-        ShortType,
-        IntegerType,
-        FloatType,
-        LongType,
-        DoubleType,
-        BooleanType,
-        TimestampType,
-    )
-from intake import DataSource, Schema
+    BooleanType,
+    ByteType,
+    DoubleType,
+    FloatType,
+    IntegerType,
+    LongType,
+    ShortType,
+    TimestampType,
+)
 
 
 class SparkHolder(object):
@@ -65,11 +65,24 @@ class HiveSource(DataSource):
 
     def __init__(self, urlpath: str, metadata=None):
         """
-            TODO
-            example:
-                hive://<table_name>?partition1=value1&partition2=value2
+            Example where the Hive table is user_events_hive without partitions:
+                user_events_hive:
+                  driver: hive
+                  args:
+                    urlpath: 'user_events_yaml_catalog'
+
+            >>> spark_df = catalog.entity.user.user_events_partitioned().to_spark()
+
+            Example where the Hive table is user_events_hive partitioned by userid:
+                user_events_hive:
+                  driver: hive
+                  args:
+                    urlpath: 'user_events_yaml_catalog?userid={{userid}}'
+
+            >>> # Reads partition userid=42
+            >>> pandas_df: pd.DataFrame = catalog.entity.user.user_events_partitioned(userid="42").read()
         Args:
-            urlpath: the hive table name, and partition keys and values
+            urlpath: the Hive table name, and partition keys and values
             metadata: Used by Intake
         """
         self._urlpath: str = urlpath
@@ -122,7 +135,6 @@ class HiveSource(DataSource):
 
     def _setup_spark_df(self) -> sql.DataFrame:
         query = self._create_hive_query()
-        print(f"hive query: {query}")
         return self._session.sql(query)
 
     def read_partition(self, i):

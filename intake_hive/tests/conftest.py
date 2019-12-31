@@ -2,8 +2,6 @@ from pathlib import Path
 
 import pytest
 
-import intake
-
 
 @pytest.fixture
 def catalog_path():
@@ -11,5 +9,5 @@ def catalog_path():
 
 
 @pytest.fixture
-def cat(catalog_path: str):
-    return intake.Catalog(catalog_path)
+def dal_catalog_path():
+    return str(Path(__file__).resolve().parent.joinpath(Path("dal-catalog.yaml")))

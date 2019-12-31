@@ -4,17 +4,13 @@
 .. image:: https://coveralls.io/repos/github/zillow/intake-hive/badge.svg?branch=master
     :target: https://coveralls.io/github/zillow/intake-hive?branch=master
 
-.. image:: https://readthedocs.org/projects/intake-hive/badge/?version=latest
-    :target: https://intake-hive.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
 
-
-Welcome to Intake Hive  plugin
+Welcome to the Intake Hive plugin
 ==================================================
 This `Intake <https://intake.readthedocs.io/en/latest/quickstart.html>`_ plugin 
 :
 
-Sample Catalog source entry:
+Example where the Hive table is user_events_hive partitioned by userid:
 
 .. code-block:: yaml
 
@@ -22,12 +18,16 @@ Sample Catalog source entry:
       user_events_hive:
         driver: hive
         args:
-          # Assumes the table already exists in Hive
-          urlpath: 'user_events'
+          urlpath: 'user_events_yaml_catalog?userid={{userid}}'
 
 
-Example code using sample catalog:
 
 .. code-block:: python
 
-  # TODO
+  import pandas as pd
+  import intake
+
+  catalog = intake.open_catalog(catalog_path)
+
+  # Reads partition userid=42
+  pandas_df: pd.DataFrame = catalog.entity.user.user_events_partitioned(userid="42").read()

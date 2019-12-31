@@ -86,17 +86,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/event-tracking-service.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/intake-hive.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/event-tracking-service.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/intake-hive.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/event-tracking-service"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/event-tracking-service"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/intake-hive"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/intake-hive"
 	@echo "# devhelp"
 
 epub:

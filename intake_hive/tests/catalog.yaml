@@ -8,4 +8,4 @@ sources:
     driver: hive
     args:
       # Assumes the table already exists in Hive
-      urlpath: 'user_events'
+      urlpath: 'user_events_yaml_catalog'
