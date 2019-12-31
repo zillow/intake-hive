@@ -1,0 +1,11 @@
+sources:
+  user_events_csv:
+    driver: csv
+    args: # passed to the open() method
+      urlpath: '{{ CATALOG_DIR }}/data/user_events.csv'
+
+  user_events_hive:
+    driver: hive
+    args:
+      # Assumes the table already exists in Hive
+      urlpath: 'user_events_yaml_catalog'

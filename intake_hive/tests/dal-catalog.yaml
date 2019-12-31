@@ -1,0 +1,41 @@
+metadata:
+  hierarchical_catalog: True
+  data_schema:
+    #   FUTURE: This could be a link to a kafka schema registry
+    #   kafka_schema_registry: http://url
+    entity.user.user_events: >
+      {"fields": [{"name": "userid", "type": "long"},
+                  {"name": "home_id", "type": "int"},
+                  {"name": "action", "type": ["string"]},
+                  {"name": "timestamp", "type": ["null", {"logicalType": "timestamp-millis", "type": "long"}]}
+                  ],
+       "name": "Root",
+       "type": "record"}
+    entity.user.user_events_partitioned: >
+      {"fields": [{"name": "userid", "type": "long"},
+                  {"name": "home_id", "type": "int"},
+                  {"name": "action", "type": ["string"]},
+                  {"name": "timestamp", "type": ["null", {"logicalType": "timestamp-millis", "type": "long"}]}
+                  ],
+       "name": "Root",
+       "type": "record"}
+entity:
+  user:
+    user_events:
+      driver: dal
+      description: "user_events description"
+      args:
+        default: 'local'
+        storage:
+          local: 'csv://{{ CATALOG_DIR }}/data/user_events.csv'
+          batch: 'hive://user_events_dal_catalog'
+    user_events_partitioned:
+      driver: dal
+      args:
+        default: 'batch'
+        storage:
+          batch: "hive://user_events_dal_catalog?userid={{userid}}"
+      parameters:
+        userid:
+          description: userid partition
+          type: int
