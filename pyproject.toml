@@ -21,7 +21,7 @@ hive = "intake_hive.hive_source:HiveSource"
 [tool.poetry.dependencies]
 python = ">=3.6"
 intake = ">=0.5.3"
-pyspark = "==2.3.0"  # todo: make >
+pyspark = ">=2.3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2.2"
